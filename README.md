@@ -1,81 +1,100 @@
-1. Ride-Sharing Simulation 
+# Ride-Sharing Simulator
 
-This is a ride-sharing simulator in Python. Riders request cars, and the system finds the closest available car using Quadtree and Dijkstra's algorithm.
+## About This Project
 
-You can see how cars move, track wait times, and check driver utilization.
+This is my final project for University of Advancing Technology - a ride-sharing simulator built in Python. The system matches riders with the closest available cars using Quadtree for spatial indexing and Dijkstra's algorithm for finding the shortest paths. You can watch how cars move around, track wait times, and see how efficiently drivers are being used.
 
-2. Project Files
+## Project Files
+
+```
 RiderSimulationfinal/
-│── simulation.py        # Main program
-│── quadtree.py          # Quadtree for car locations
-│── dijkstra.py          # Shortest path algorithm
-│── rider.py             # Rider class
-│── graph.py             # City map and graph
-│── map.csv              # Map data (optional)
-│── README.md            # This file
+│── simulation.py      # Main program that runs everything
+│── quadtree.py       # Quadtree implementation for finding nearby cars
+│── dijkstra.py       # Shortest path algorithm 
+│── rider.py          # Rider class
+│── graph.py          # City map and graph structure
+│── map.csv           # Map data (optional)
+│── README.md         # This file
+```
 
-3.  Requirements
+## Requirements
 
-Python 3.8 or higher
+- Python 3.8 or higher
+- matplotlib library
 
-Library: matplotlib
-
-Install matplotlib:
-
+To install matplotlib:
+```
 pip install matplotlib
+```
 
- 4. How to Run
+## How to Run
 
-Open Command Prompt
+1. Open Command Prompt/Terminal
+2. Navigate to the project folder:
+   ```
+   cd "C:\Users\salwa\OneDrive\Desktop\RiderSimulationfinal"
+   ```
+3. Run the simulation:
+   ```
+   python simulation.py
+   ```
 
-Go to the project folder:
+## Optional Settings
 
-cd "C:\Users\salwa\OneDrive\Desktop\RiderSimulationfinal"
+You can customize the simulation with these parameters:
 
-
-Run the simulation:
-
-python simulation.py
-
-5.  Optional Settings
-
-You can change simulation settings with these options:
-
+```
 python simulation.py --max-time 200 --mean-arrival-time 10 --map-file map.csv
+```
 
-Option	What it does	Default
---max-time	How long the simulation runs	100
---mean-arrival-time	Average time between riders	5
---map-file	Map file to use	map.csv
-6. How It Works
+| Option | What it does | Default |
+|--------|-------------|---------|
+| `--max-time` | How long the simulation runs | 100 |
+| `--mean-arrival-time` | Average time between new riders | 5 |
+| `--map-file` | Map file to use | map.csv |
 
-Cars are placed on the map.
+## How It Works
 
-Riders appear randomly.
-
-Quadtree finds the 3–5 closest cars fast.
-
-Dijkstra finds the fastest route for each car.
-
-The closest car is assigned to the rider.
-
-Pickup and dropoff events are scheduled automatically.
-
-Metrics like wait time and driver utilization are tracked.
-
-A visualization is created showing car locations and summary metrics.
-
-6. Output
-TIME 2.35: Car 1 picked up Rider 1
-TIME 5.67: Rider 1 dropped off by Car 1
+1. Cars are placed on the map at the start
+2. Riders appear randomly based on the arrival time setting
+3. When a rider requests a ride, the Quadtree quickly finds the 3-5 closest cars
+4. Dijkstra's algorithm calculates the fastest route for each potential car
+5. The system assigns the closest car to the rider
+6. Pickup and dropoff events are scheduled automatically
+7. The simulation tracks metrics like wait time and driver utilization throughout
 
 
-7. Visualization (simulation_summary.png):
+## Visualization
 
-Left: Car positions on the map
+The simulation creates a file called `simulation_summary.png` that shows:
+- **Left side**: Car positions on the map
+- **Right side**: Summary metrics including:
+  - Average wait time
+  - Trip duration
+  - Number of rides per car
+  - Driver utilization percentage
 
-Right: Metrics: wait time, trip duration, rides per car, driver utilization
+## Key Features
 
+- Fast car-rider matching using Quadtree spatial indexing
+- Optimal route calculation with Dijkstra's algorithm
+- Real-time tracking of simulation metrics
+- Visual output showing system performance
+- Configurable simulation parameters
 
-Salwa Ibrahim
-University of Advancing Technology
+## Performance Metrics Tracked
+
+- **Wait Time**: How long riders wait for their car to arrive
+- **Trip Duration**: Total time from pickup to dropoff
+- **Driver Utilization**: Percentage of time drivers are busy vs idle
+- **Rides per Car**: Distribution of rides across the fleet
+
+## Technical Implementation
+
+The simulation uses an event-driven approach where each pickup and dropoff is scheduled as an event. The Quadtree data structure allows for efficient O(log n) nearest neighbor searches, while Dijkstra's algorithm ensures we always find the shortest path between any two points on the map.
+
+---
+
+**Author:** Salwa Ibrahim  
+**University:** University of Advancing Technology  
+**Course:** Final Project
